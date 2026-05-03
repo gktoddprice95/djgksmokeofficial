@@ -53,10 +53,64 @@
           </a>
         </section>
 
+        <section class="booking-panel" aria-labelledby="booking-heading">
+          <div class="booking-header">
+            <h2 id="booking-heading">Book Now</h2>
+            <p class="description">Send a direct booking request to GK Smoke via email.</p>
+          </div>
+
+          <form id="booking-form" class="booking-form" onsubmit="handleBooking(event)">
+            <label class="field-group">
+              <span>Name</span>
+              <input class="input-field" type="text" name="name" placeholder="Your name" required />
+            </label>
+
+            <label class="field-group">
+              <span>Email</span>
+              <input class="input-field" type="email" name="email" placeholder="you@example.com" required />
+            </label>
+
+            <label class="field-group">
+              <span>Event Date</span>
+              <input class="input-field" type="date" name="date" required />
+            </label>
+
+            <label class="field-group full-width">
+              <span>Event Details</span>
+              <textarea class="textarea-field" name="details" rows="4" placeholder="Venue, event type, audience size, and any special requests" required></textarea>
+            </label>
+
+            <button class="submit-button" type="submit">Send Booking Request</button>
+          </form>
+        </section>
+
         <footer class="footer-note">
           <p>Stay connected and catch the latest drops from GK Smoke.</p>
         </footer>
       </div>
     </main>
+    <script>
+      function handleBooking(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const date = form.date.value;
+        const details = form.details.value.trim();
+
+        const subject = encodeURIComponent(`Booking Request from ${name}`);
+        const bodyLines = [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Event Date: ${date}`,
+          `Details: ${details}`,
+          '',
+          'Please get back to me with availability and pricing.'
+        ];
+        const body = encodeURIComponent(bodyLines.join('\n'));
+        const mailto = `mailto:gk.toddprice95@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = mailto;
+      }
+    </script>
   </body>
 </html>
